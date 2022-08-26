@@ -69,3 +69,8 @@ autocmd('BufLeave', {
   pattern = 'term://*',
   command = 'stopinsert'
 })
+
+autocmd('BufWritePre', {
+  pattern = '*.go',
+  command = ":silent! lua require('go.format').goimport()"
+})

@@ -1,3 +1,4 @@
 # directories and files to exclude
 nvim/after
 packer/
+nvim/plugin/

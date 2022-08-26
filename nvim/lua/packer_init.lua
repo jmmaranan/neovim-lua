@@ -27,12 +27,14 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save the packer_init.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost packer_init.lua source <afile> | PackerSync
-  augroup end
-]]
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
+augroup("packer_user_config", {clear = true})
+autocmd(
+  {"BufWritePost"},
+  { pattern = { "packer_init.lua"}, command = "source <afile> | PackerSync"}
+)
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, 'packer')
@@ -75,6 +77,7 @@ return packer.startup(function(use)
   use 'navarasu/onedark.nvim'
   use 'tanvirtin/monokai.nvim'
   use { 'rose-pine/neovim', as = 'rose-pine' }
+  use { 'gruvbox-community/gruvbox'}
 
   -- LSP
   use 'neovim/nvim-lspconfig'
@@ -89,6 +92,12 @@ return packer.startup(function(use)
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
     },
+  }
+
+  -- Telescope
+  use {
+    'nvim-telescope/telescope.nvim',                 -- fuzzy finder
+    requires = { {'nvim-lua/plenary.nvim'} }
   }
 
   -- Statusline
@@ -110,6 +119,24 @@ return packer.startup(function(use)
   use {
     'goolord/alpha-nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
+  }
+
+  -- Go Nvim
+  use {
+    'ray-x/go.nvim'
+  }
+  use {
+    'ray-x/guihua.lua'
+  }
+
+  -- Go Debugging
+  use {
+    'sebdah/vim-delve'
+  }
+
+  -- Vim Commentary
+  use {
+    'tpope/vim-commentary'
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
