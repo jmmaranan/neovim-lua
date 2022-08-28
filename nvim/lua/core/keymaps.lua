@@ -2,16 +2,10 @@
 -- Define keymaps of Neovim and installed plugins.
 -----------------------------------------------------------
 
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local map = require('core/utils').map
 
 -- Change leader to a comma
-vim.g.mapleader = ' '
+vim.g.mapleader = ','
 
 -----------------------------------------------------------
 -- Neovim shortcuts
@@ -74,3 +68,6 @@ map('n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>
 map('n', '<leader>fg', '<cmd>lua require(\'telescope.builtin\').live_grep()<cr>')
 map('n', '<leader>fb', '<cmd>lua require(\'telescope.builtin\').buffers()<cr>')
 map('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<cr>')
+
+-- Fugitive
+map('n', '<leader>gi', ':Git<space>')
