@@ -19,6 +19,7 @@ require('plugins/go-nvim')
 require('plugins/indent-blankline')
 require('plugins/nvim-cmp')
 require('plugins/nvim-lspconfig')
+require('plugins/nvim-rust')
 require('plugins/nvim-treesitter')
 require('plugins/alpha-nvim')
 
